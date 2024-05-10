@@ -16,9 +16,11 @@ export default function TextForm(props) {
         setText('')
     }
     const handleCopyText = () => {
-        var textFiled  =   document.getElementById('field');
-        textFiled.select();
-        navigator.clipboard.writeText(textFiled.value);
+        // var textFiled  =   document.getElementById('field');
+        // textFiled.select();
+        // navigator.clipboard.writeText(textFiled.value);
+        navigator.clipboard.writeText(text);
+        // document.getSelection().removeAllRanges();
     }
     const handleRemoveExtraSpace = () => {
          var newText =    text.split(/[ ]+/);
@@ -32,14 +34,14 @@ export default function TextForm(props) {
                     <textarea  className="form-control" value = {text} id = 'field' onChange={handleOnChange} rows="8"></textarea>
 
             </div>
-            <button className="btn btn-primary" onClick={handleUpClick}>Covert to Uppercase</button>
-            <button className="btn btn-primary mx-2" onClick={handleLoChange}>Covert to Lowercase</button>
-            <button className="btn btn-primary mx-2" onClick={handleClearText}>Clear Text</button>
-            <button className="btn btn-primary mx-2" onClick={handleCopyText}>Copy Text</button>
-            <button className="btn btn-primary mx-2" onClick={handleRemoveExtraSpace}>Remove Extra Space</button>
+            <button disabled={text.length === 0} className="btn btn-primary" onClick={handleUpClick}>Covert to Uppercase</button>
+            <button disabled={text.length === 0} className="btn btn-primary mx-2 my-2" onClick={handleLoChange}>Covert to Lowercase</button>
+            <button disabled={text.length === 0} className="btn btn-primary mx-2 my-2" onClick={handleClearText}>Clear Text</button>
+            <button disabled={text.length === 0} className="btn btn-primary mx-2 my-2" onClick={handleCopyText}>Copy Text</button>
+            <button disabled={text.length === 0} className="btn btn-primary mx-2 my-2" onClick={handleRemoveExtraSpace}>Remove Extra Space</button>
             <div className="continer">
                 <h3>Your Text Summary</h3>
-                <p>{text.length} Characters, {text.split(' ').length} Words</p>
+                <p>{text.length} Characters, {text.split(/\s+/).filter((element) => element.length !== 0).length} Words</p>
             </div>
         </div>
   )
